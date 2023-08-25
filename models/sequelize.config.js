@@ -1,7 +1,14 @@
 import {Sequelize} from "sequelize";
 
+import * as dotenv from "dotenv";
+import "dotenv/config";
+
+
 // 1. Creamos la base de datos
-const db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
+const db = new Sequelize(
+  process.env.DB_NAME, 
+  process.env.DB_USER, 
+  process.env.DB_PASS, {
   host: 'localhost',
   dialect: 'postgres',
   logging: false
@@ -19,4 +26,4 @@ async function syncDB () {
 }
 syncDB()
 
-module.exports = db
+export {db, Sequelize}

@@ -1,8 +1,11 @@
-const {User} = require('../models/index.model.js')
+import { Router } from 'express';
+import * as User from '../models/index.models.js'
+
+const router = Router();
 
 router.get('/api/users'), async(req,res)=>{
     const users = await User.findAll()
     return res.json(users)
 }
 
-module.exports = router
+export default router

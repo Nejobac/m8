@@ -1,7 +1,7 @@
-import User from "./user.model.js";
-import Bootcamp from "./bootcamp.model.js";
+import User from "./users.model.js";
+import Bootcamp from "./bootcams.models.js";
 
-import {db} from '../configs/sequelize.config.js';
+import * as db from './sequelize.config.js';
 
 User.belongsToMany(Bootcamp, {
     through: "user_bootcamp",

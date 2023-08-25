@@ -1,10 +1,10 @@
-const express = require('express');
-const jwt = require('jsonwebtoken')
+import express from 'express'
+import jwt from 'jsonwebtoken'
 const router = express.Router();
-const bcrypt = require('bcrypt')
+import bcrypt from 'bcrypt'
 
-const {auth_required} = require('../middlewares.js')
-const User = require('../models/users.model.js')
+import { auth_required } from '../middlewares.js';
+import User from '../models/users.model.js'
 
 
 /* Para crear un JWT. */
@@ -124,5 +124,5 @@ router.get('/my', auth_required, (req, res) => {
   res.json(data)
 })
 
-
-module.exports = router;
+export default router
+// module.exports = router;

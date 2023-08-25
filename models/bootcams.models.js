@@ -1,4 +1,4 @@
-import {db} from '../configs/sequelize.config.js';
+import  {db, Sequelize} from './sequelize.config.js';
 import { DataTypes as dt } from 'sequelize';
 
 const Bootcamp = db.define('Bootcamp', {

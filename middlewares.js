@@ -1,9 +1,10 @@
-const jwt = require('jsonwebtoken')
+// const jwt = require('jsonwebtoken')
+import jwt from 'jsonwebtoken'
 
 const llave_secreta = 'topsecret'
 
 
-function auth_required (req, res, next) {
+export function auth_required (req, res, next) {
   // quiero que esta ruta sólo sea para usuarios logueados
   // Si puedo abrir el token, entonces asumimos que el usuario SI está logueado
   // 1. Verificamos que tenga un token válido
@@ -30,5 +31,5 @@ function auth_required (req, res, next) {
   // 4. Si está todo ok, procedemos con el camino tradicional
   next()
 }
-
-module.exports = {auth_required, llave_secreta}
+export default llave_secreta
+// module.exports = {auth_required, llave_secreta}

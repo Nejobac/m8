@@ -1,4 +1,4 @@
-import {db} from '../configs/sequelize.config.js';
+import  {db, Sequelize} from './sequelize.config.js';
 import { DataTypes as dt } from 'sequelize';
 
 const User = db.define('user', {
@@ -12,7 +12,7 @@ const User = db.define('user', {
       }
     }
   },
-  laststName: {
+  lastName: {
     type: dt.STRING,
     allowNull: false,
     validate: {
@@ -38,14 +38,4 @@ const User = db.define('user', {
     allowNull: false,
   }
 }, {timestamps: true})
-
-
-// try {
-//   db.sync()
-// }
-// catch(err) {
-//   console.error('Something went wrong with the SYNC of the table Transferencia', err)
-// }
-
-
-module.exports = User
+export default User
