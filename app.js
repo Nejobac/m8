@@ -4,37 +4,30 @@ import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import dotenv from "dotenv";
-import exphbs from "express-handlebars";
+import { engine } from "express-handlebars";
 dotenv.config();
 
-import indexRouter from "./routes/index.js";
-import authRouter from "./routes/auth.js";
+import indexRouter from "./routes/index.routes.js";
+import authRouter from "./routes/auth.routes.js";
 import usersRouter from "./routes/users.routes.js";
+import parentDirectory from "./utils/utils.js";
 
 const app = express();
 
-// Obtener la ruta del directorio actual
-const currentDirectory = path.dirname(new URL(import.meta.url).pathname);
-
-// view engine setup
-const handlebars = exphbs.create({
-    layoutsDir: path.join(currentDirectory, "views"),
-    partialsDir: path.join(currentDirectory, "views/partials"),
-});
-app.engine(".hbs", handlebars.engine);
-app.set("view engine", "hbs");
-app.set("views", path.join(currentDirectory, "views"));
+app.engine("handlebars",engine());
+app.set("view engine","handlebars")
+app.set("views",path.resolve(parentDirectory + "/views"))
 
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 // exponemos los archivos estáticos
-app.use(express.static(path.join(currentDirectory, "public")));
-app.use(express.static(path.join(currentDirectory, "node_modules/bootstrap/dist")));
-app.use(express.static(path.join(currentDirectory, "node_modules/axios/dist")));
-app.use(express.static(path.join(currentDirectory, "node_modules/toastr/build")));
-app.use(express.static(path.join(currentDirectory, "node_modules/jquery/dist")));
+app.use(express.static(path.join(parentDirectory, "public")));
+app.use(express.static(path.join(parentDirectory, "node_modules/bootstrap/dist")));
+app.use(express.static(path.join(parentDirectory, "node_modules/axios/dist")));
+app.use(express.static(path.join(parentDirectory, "node_modules/toastr/build")));
+app.use(express.static(path.join(parentDirectory, "node_modules/jquery/dist")));
 
 app.use("/", indexRouter);
 app.use("/api/", authRouter);

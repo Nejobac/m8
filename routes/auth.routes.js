@@ -96,7 +96,7 @@ router.post('/signup', async function(req, res, next) {
   }, process.env.SECRET_KEY)
 
   // 4. Le retorno el token al cliente
-  res.json(token);
+  res.json({Mensaje: 'Usuario creado con exito',newUser,Token:token});
 });
 
 /* Para leer un JWT */
